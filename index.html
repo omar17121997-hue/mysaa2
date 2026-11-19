@@ -1,0 +1,1496 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+  <title>منصة التحدي والمرح 3D | الدعم النفسي الاجتماعي والتمكين</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@500;700;800;900&family=Readex+Pro:wght@400;600;700&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --bg-grad-1: #0f172a;
+      --bg-grad-2: #1e1b4b;
+      --bg-grad-3: #311042;
+      --surface: rgba(30, 41, 59, 0.82);
+      --surface-light: rgba(255, 255, 255, 0.08);
+      --text-main: #f8fafc;
+      --text-muted: #cbd5e1;
+      --primary: #8b5cf6;
+      --primary-dark: #4c1d95;
+      --secondary: #ec4899;
+      --secondary-dark: #831843;
+      --accent: #f59e0b;
+      --accent-dark: #78350f;
+      --teal: #14b8a6;
+      --teal-dark: #115e59;
+      --blue: #3b82f6;
+      --blue-dark: #1e3a8a;
+      --radius-lg: 24px;
+      --radius-md: 16px;
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+      -webkit-tap-highlight-color: transparent;
+    }
+
+    body {
+      font-family: 'Readex Pro', 'Cairo', sans-serif;
+      background: radial-gradient(circle at top right, var(--bg-grad-3), var(--bg-grad-2) 45%, var(--bg-grad-1) 100%);
+      color: var(--text-main);
+      min-height: 100vh;
+      overflow-x: hidden;
+      padding-bottom: 48px;
+    }
+
+    h1, h2, h3, .font-title {
+      font-family: 'Cairo', sans-serif;
+      font-weight: 900;
+    }
+
+    .btn-3d {
+      border: none;
+      border-radius: 16px;
+      font-family: 'Cairo', sans-serif;
+      font-weight: 800;
+      cursor: pointer;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+      transition: transform 0.12s cubic-bezier(0.34, 1.56, 0.64, 1), box-shadow 0.12s ease, filter 0.15s ease;
+      position: relative;
+      user-select: none;
+      color: #fff;
+      padding: 10px 16px;
+      font-size: 0.92rem;
+    }
+
+    .btn-3d:active {
+      transform: translateY(4px) scale(0.98);
+    }
+
+    .btn-purple {
+      background: linear-gradient(180deg, #a78bfa 0%, var(--primary) 100%);
+      box-shadow: 0 6px 0 var(--primary-dark), 0 12px 20px rgba(109, 40, 217, 0.35);
+    }
+    .btn-purple:active { box-shadow: 0 2px 0 var(--primary-dark); }
+
+    .btn-pink {
+      background: linear-gradient(180deg, #f472b6 0%, var(--secondary) 100%);
+      box-shadow: 0 6px 0 var(--secondary-dark), 0 12px 20px rgba(190, 24, 93, 0.35);
+    }
+    .btn-pink:active { box-shadow: 0 2px 0 var(--secondary-dark); }
+
+    .btn-gold {
+      background: linear-gradient(180deg, #fbbf24 0%, var(--accent) 100%);
+      color: #1e1b4b;
+      box-shadow: 0 6px 0 var(--accent-dark), 0 12px 20px rgba(180, 83, 9, 0.35);
+    }
+    .btn-gold:active { box-shadow: 0 2px 0 var(--accent-dark); }
+
+    .btn-teal {
+      background: linear-gradient(180deg, #2dd4bf 0%, var(--teal) 100%);
+      color: #042f2e;
+      box-shadow: 0 6px 0 var(--teal-dark), 0 12px 20px rgba(15, 118, 110, 0.35);
+    }
+    .btn-teal:active { box-shadow: 0 2px 0 var(--teal-dark); }
+
+    .btn-glass {
+      background: rgba(255, 255, 255, 0.1);
+      border: 1px solid rgba(255, 255, 255, 0.2);
+      box-shadow: 0 5px 0 rgba(15, 23, 42, 0.65);
+      backdrop-filter: blur(10px);
+    }
+    .btn-glass:active { box-shadow: 0 2px 0 rgba(15, 23, 42, 0.65); }
+
+    .container {
+      max-width: 1180px;
+      margin: 0 auto;
+      padding: 16px;
+    }
+
+    /* Top Header */
+    .top-bar {
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+      background: var(--surface);
+      border: 1px solid rgba(255, 255, 255, 0.14);
+      border-radius: var(--radius-lg);
+      padding: 16px 20px;
+      backdrop-filter: blur(16px);
+      box-shadow: 0 16px 35px rgba(0, 0, 0, 0.35);
+      margin-bottom: 18px;
+    }
+
+    .top-bar-main {
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      justify-content: space-between;
+      gap: 12px;
+    }
+
+    .brand {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+
+    .icon-3d-badge {
+      width: 52px;
+      height: 52px;
+      border-radius: 16px;
+      background: linear-gradient(135deg, #f472b6, #8b5cf6);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 28px;
+      box-shadow: 0 6px 0 #5b21b6, inset 0 2px 4px rgba(255,255,255,0.5);
+    }
+
+    .brand-text h1 {
+      font-size: 1.3rem;
+      line-height: 1.25;
+      background: linear-gradient(90deg, #fff, #f9a8d4);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+    }
+
+    .brand-text p {
+      font-size: 0.82rem;
+      color: var(--text-muted);
+    }
+
+    .controls-group {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+    }
+
+    .soundboard-strip {
+      display: none;
+      flex-wrap: wrap;
+      align-items: center;
+      gap: 8px;
+      background: rgba(15, 23, 42, 0.65);
+      border: 1px solid rgba(167, 139, 250, 0.25);
+      border-radius: 16px;
+      padding: 10px 14px;
+    }
+    .soundboard-strip.open { display: flex; }
+
+    /* Teams Scoreboard */
+    .scoreboard-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 10px;
+      flex-wrap: wrap;
+      gap: 8px;
+    }
+
+    .scoreboard {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+      gap: 14px;
+      margin-bottom: 20px;
+    }
+
+    .team-card {
+      background: linear-gradient(145deg, rgba(30, 41, 59, 0.92), rgba(15, 23, 42, 0.96));
+      border-radius: var(--radius-lg);
+      padding: 14px 18px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 10px;
+      border: 2px solid rgba(255,255,255,0.12);
+      box-shadow: 0 10px 25px rgba(0,0,0,0.3);
+    }
+
+    .team-theme-0 { border-color: rgba(244, 114, 182, 0.5); }
+    .team-theme-1 { border-color: rgba(45, 212, 191, 0.5); }
+    .team-theme-2 { border-color: rgba(167, 139, 250, 0.5); }
+    .team-theme-3 { border-color: rgba(251, 191, 36, 0.5); }
+
+    .team-info {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+
+    .team-avatar-3d {
+      width: 48px;
+      height: 48px;
+      border-radius: 15px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 24px;
+      flex-shrink: 0;
+      background: linear-gradient(135deg, #f472b6, #db2777);
+      box-shadow: 0 5px 0 #9d174d, inset 0 2px 4px rgba(255,255,255,0.45);
+    }
+    .team-theme-1 .team-avatar-3d {
+      background: linear-gradient(135deg, #2dd4bf, #0d9488);
+      box-shadow: 0 5px 0 #115e59, inset 0 2px 4px rgba(255,255,255,0.45);
+    }
+    .team-theme-2 .team-avatar-3d {
+      background: linear-gradient(135deg, #a78bfa, #7c3aed);
+      box-shadow: 0 5px 0 #4c1d95, inset 0 2px 4px rgba(255,255,255,0.45);
+    }
+    .team-theme-3 .team-avatar-3d {
+      background: linear-gradient(135deg, #fbbf24, #d97706);
+      box-shadow: 0 5px 0 #78350f, inset 0 2px 4px rgba(255,255,255,0.45);
+    }
+
+    .team-name-input {
+      background: transparent;
+      border: none;
+      border-bottom: 1px dashed rgba(255,255,255,0.35);
+      color: #fff;
+      font-family: 'Cairo', sans-serif;
+      font-weight: 800;
+      font-size: 1.05rem;
+      width: 145px;
+      padding: 2px 4px;
+    }
+    .team-name-input:focus {
+      outline: none;
+      border-bottom-color: #fbbf24;
+    }
+
+    .score-controls {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .score-val {
+      font-family: 'Cairo', sans-serif;
+      font-weight: 900;
+      font-size: 1.75rem;
+      min-width: 56px;
+      text-align: center;
+      color: #fbbf24;
+      text-shadow: 0 2px 10px rgba(251, 191, 36, 0.35);
+    }
+
+    .mini-btn {
+      width: 36px;
+      height: 36px;
+      border-radius: 10px;
+      border: none;
+      font-weight: 900;
+      font-size: 1.05rem;
+      cursor: pointer;
+      color: #fff;
+      background: rgba(255,255,255,0.14);
+      box-shadow: 0 3px 0 rgba(0,0,0,0.45);
+    }
+    .mini-btn:active { transform: translateY(2px); }
+
+    /* Navigation Tabs */
+    .mode-tabs {
+      display: grid;
+      grid-template-columns: repeat(5, 1fr);
+      gap: 10px;
+      margin-bottom: 22px;
+    }
+
+    .tab-btn {
+      padding: 13px 10px;
+      border-radius: 18px;
+      background: rgba(30, 41, 59, 0.7);
+      border: 1px solid rgba(255,255,255,0.12);
+      color: var(--text-muted);
+      font-family: 'Cairo', sans-serif;
+      font-weight: 800;
+      font-size: 0.96rem;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+      transition: all 0.2s ease;
+      box-shadow: 0 6px 0 rgba(15, 23, 42, 0.75);
+    }
+
+    .tab-btn.active {
+      background: linear-gradient(180deg, #8b5cf6 0%, #6d28d9 100%);
+      color: #fff;
+      border-color: #c4b5fd;
+      box-shadow: 0 6px 0 #4c1d95, 0 12px 24px rgba(109, 40, 217, 0.45);
+      transform: translateY(-2px);
+    }
+
+    .game-section { display: none; animation: fadeIn 0.3s ease; }
+    .game-section.active { display: block; }
+
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(8px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    .section-header {
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      justify-content: space-between;
+      gap: 12px;
+      background: rgba(30, 41, 59, 0.6);
+      border: 1px solid rgba(255,255,255,0.1);
+      padding: 14px 18px;
+      border-radius: 20px;
+      margin-bottom: 18px;
+    }
+
+    /* Mode 1: Trivia Grid */
+    .categories-grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 14px;
+    }
+
+    .cat-column {
+      background: rgba(15, 23, 42, 0.6);
+      border: 1px solid rgba(255,255,255,0.09);
+      border-radius: 22px;
+      padding: 12px;
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+    }
+
+    .cat-header {
+      text-align: center;
+      padding: 12px 8px;
+      border-radius: 16px;
+      font-family: 'Cairo', sans-serif;
+      font-weight: 900;
+      font-size: 1.02rem;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 4px;
+      box-shadow: inset 0 2px 4px rgba(255,255,255,0.25);
+    }
+
+    .cat-0 .cat-header { background: linear-gradient(135deg, #ec4899, #be185d); }
+    .cat-1 .cat-header { background: linear-gradient(135deg, #8b5cf6, #5b21b6); }
+    .cat-2 .cat-header { background: linear-gradient(135deg, #14b8a6, #0f766e); }
+    .cat-3 .cat-header { background: linear-gradient(135deg, #f59e0b, #b45309); }
+
+    .q-tile {
+      border: none;
+      border-radius: 18px;
+      padding: 18px 10px;
+      font-family: 'Cairo', sans-serif;
+      font-weight: 900;
+      font-size: 1.35rem;
+      color: #fff;
+      cursor: pointer;
+      transition: transform 0.15s cubic-bezier(0.34, 1.56, 0.64, 1);
+    }
+
+    .cat-0 .q-tile { background: linear-gradient(180deg, #f472b6, #db2777); box-shadow: 0 6px 0 #831843; }
+    .cat-1 .q-tile { background: linear-gradient(180deg, #a78bfa, #7c3aed); box-shadow: 0 6px 0 #4c1d95; }
+    .cat-2 .q-tile { background: linear-gradient(180deg, #2dd4bf, #0d9488); box-shadow: 0 6px 0 #115e59; }
+    .cat-3 .q-tile { background: linear-gradient(180deg, #fbbf24, #d97706); box-shadow: 0 6px 0 #78350f; color: #1e1b4b; }
+
+    .q-tile:hover:not(.used) { transform: translateY(-3px) scale(1.02); }
+    .q-tile.used {
+      background: rgba(51, 65, 85, 0.45) !important;
+      box-shadow: 0 3px 0 rgba(15, 23, 42, 0.6) !important;
+      color: rgba(255,255,255,0.3) !important;
+    }
+
+    /* Mode 2: 3D Mystery Boxes */
+    .boxes-grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 16px;
+    }
+
+    .mystery-box {
+      aspect-ratio: 1 / 0.88;
+      border-radius: 24px;
+      border: none;
+      cursor: pointer;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      gap: 6px;
+      background: linear-gradient(145deg, #3b82f6, #1d4ed8);
+      box-shadow: 0 8px 0 #1e3a8a, 0 16px 25px rgba(29, 78, 216, 0.35), inset 0 3px 6px rgba(255,255,255,0.4);
+      color: #fff;
+      transition: transform 0.2s cubic-bezier(0.34, 1.56, 0.64, 1);
+    }
+
+    .mystery-box:nth-child(3n+1) {
+      background: linear-gradient(145deg, #ec4899, #be185d);
+      box-shadow: 0 8px 0 #831843, 0 16px 25px rgba(190, 24, 93, 0.35), inset 0 3px 6px rgba(255,255,255,0.4);
+    }
+    .mystery-box:nth-child(3n+2) {
+      background: linear-gradient(145deg, #8b5cf6, #6d28d9);
+      box-shadow: 0 8px 0 #4c1d95, 0 16px 25px rgba(109, 40, 217, 0.35), inset 0 3px 6px rgba(255,255,255,0.4);
+    }
+    .mystery-box:nth-child(3n) {
+      background: linear-gradient(145deg, #14b8a6, #0f766e);
+      box-shadow: 0 8px 0 #115e59, 0 16px 25px rgba(15, 118, 110, 0.35), inset 0 3px 6px rgba(255,255,255,0.4);
+    }
+
+    .mystery-box:hover:not(.opened) { transform: translateY(-5px) scale(1.03); }
+    .mystery-box.highlight {
+      transform: scale(1.08);
+      outline: 4px solid #fbbf24;
+      z-index: 2;
+    }
+
+    .mystery-box .box-emoji { font-size: 2.5rem; }
+    .mystery-box .box-num {
+      font-family: 'Cairo', sans-serif;
+      font-weight: 900;
+      font-size: 1.15rem;
+      background: rgba(0,0,0,0.28);
+      padding: 2px 14px;
+      border-radius: 99px;
+    }
+    .mystery-box.opened {
+      background: rgba(30, 41, 59, 0.5) !important;
+      box-shadow: 0 4px 0 rgba(15, 23, 42, 0.7) !important;
+      opacity: 0.45;
+    }
+
+    /* Mode 3: 3D Wheel of Emotions */
+    .wheel-card, .meter-card, .oasis-card {
+      background: var(--surface);
+      border: 1px solid rgba(255,255,255,0.14);
+      border-radius: 28px;
+      padding: 24px 20px;
+      text-align: center;
+      backdrop-filter: blur(16px);
+      box-shadow: 0 20px 40px rgba(0,0,0,0.4);
+    }
+
+    .wheel-wrapper {
+      position: relative;
+      width: 310px;
+      height: 310px;
+      margin: 18px auto;
+    }
+
+    #wheelCanvas {
+      width: 100%;
+      height: 100%;
+      border-radius: 50%;
+      box-shadow: 0 12px 30px rgba(0,0,0,0.5);
+      transition: transform 3.2s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+
+    .wheel-pointer {
+      position: absolute;
+      top: -14px;
+      left: 50%;
+      transform: translateX(-50%);
+      font-size: 2rem;
+      z-index: 5;
+      filter: drop-shadow(0 4px 6px rgba(0,0,0,0.6));
+    }
+
+    /* Mode 4: Applause & Energy Meter */
+    .meter-team-select {
+      display: flex;
+      justify-content: center;
+      gap: 12px;
+      margin: 16px 0 22px;
+      flex-wrap: wrap;
+    }
+
+    .select-pill {
+      padding: 10px 20px;
+      border-radius: 99px;
+      border: 2px solid rgba(255,255,255,0.15);
+      background: rgba(15, 23, 42, 0.6);
+      color: #fff;
+      font-family: 'Cairo', sans-serif;
+      font-weight: 800;
+      cursor: pointer;
+    }
+    .select-pill.selected {
+      border-color: #fbbf24;
+      background: rgba(251, 191, 36, 0.2);
+      color: #fbbf24;
+    }
+
+    .gauge-wrapper {
+      max-width: 650px;
+      margin: 0 auto 22px;
+      background: rgba(15, 23, 42, 0.85);
+      padding: 10px;
+      border-radius: 99px;
+      border: 2px solid rgba(255,255,255,0.12);
+      box-shadow: inset 0 4px 12px rgba(0,0,0,0.6);
+    }
+
+    .gauge-fill {
+      height: 38px;
+      width: 6%;
+      border-radius: 99px;
+      background: linear-gradient(90deg, #14b8a6, #f59e0b, #ec4899);
+      transition: width 0.08s ease-out;
+      display: flex;
+      align-items: center;
+      justify-content: flex-end;
+      padding-left: 14px;
+      font-weight: 900;
+      color: #fff;
+    }
+
+    .meter-stats {
+      display: flex;
+      justify-content: center;
+      gap: 28px;
+      margin-bottom: 22px;
+      font-size: 1.1rem;
+      flex-wrap: wrap;
+    }
+    .meter-stats span strong { color: #fbbf24; font-size: 1.45rem; }
+
+    /* Mode 5: Calm Oasis */
+    .breathing-orb {
+      width: 175px;
+      height: 175px;
+      border-radius: 50%;
+      margin: 22px auto;
+      background: radial-gradient(circle, rgba(45,212,191,0.75), rgba(139,92,246,0.5), rgba(15,23,42,0.3));
+      border: 3px solid #2dd4bf;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      transition: transform 3.8s ease-in-out;
+      box-shadow: 0 0 35px rgba(45,212,191,0.35);
+    }
+    .breathing-orb.expand { transform: scale(1.22); }
+    .breathing-orb.contract { transform: scale(0.8); }
+
+    .affirmation-box {
+      max-width: 680px;
+      margin: 24px auto 0;
+      padding: 20px;
+      border-radius: 22px;
+      background: linear-gradient(145deg, rgba(49, 16, 66, 0.85), rgba(30, 27, 75, 0.9));
+      border: 1.5px solid rgba(244, 114, 182, 0.45);
+    }
+
+    /* Modals */
+    .modal-backdrop {
+      position: fixed;
+      inset: 0;
+      background: rgba(9, 13, 26, 0.84);
+      backdrop-filter: blur(10px);
+      display: none;
+      align-items: center;
+      justify-content: center;
+      padding: 16px;
+      z-index: 100;
+    }
+    .modal-backdrop.open { display: flex; animation: fadeIn 0.2s ease; }
+
+    .modal-box {
+      background: linear-gradient(160deg, #1e293b 0%, #0f172a 100%);
+      border: 2px solid rgba(255,255,255,0.18);
+      border-radius: 28px;
+      width: 100%;
+      max-width: 650px;
+      padding: 26px 24px;
+      box-shadow: 0 25px 60px rgba(0,0,0,0.65);
+      text-align: center;
+      max-height: 90vh;
+      overflow-y: auto;
+    }
+
+    .modal-badge {
+      display: inline-block;
+      padding: 6px 16px;
+      border-radius: 99px;
+      background: rgba(139, 92, 246, 0.25);
+      border: 1px solid #a78bfa;
+      color: #ddd6fe;
+      font-weight: 700;
+      font-size: 0.92rem;
+      margin-bottom: 12px;
+    }
+
+    .timer-ring {
+      width: 68px;
+      height: 68px;
+      border-radius: 50%;
+      border: 4px solid #fbbf24;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-family: 'Cairo', sans-serif;
+      font-weight: 900;
+      font-size: 1.5rem;
+      color: #fbbf24;
+      margin: 0 auto 12px;
+      box-shadow: 0 0 20px rgba(251, 191, 36, 0.25);
+    }
+
+    .modal-question {
+      font-family: 'Cairo', sans-serif;
+      font-weight: 800;
+      font-size: 1.38rem;
+      line-height: 1.55;
+      margin-bottom: 14px;
+      color: #fff;
+    }
+
+    .facilitator-tip {
+      background: rgba(244, 114, 182, 0.12);
+      border: 1px solid rgba(244, 114, 182, 0.35);
+      color: #f9a8d4;
+      border-radius: 14px;
+      padding: 10px 14px;
+      font-size: 0.9rem;
+      margin-bottom: 16px;
+    }
+
+    .modal-answer {
+      background: rgba(20, 184, 166, 0.16);
+      border: 1px solid rgba(45, 212, 191, 0.45);
+      border-radius: 18px;
+      padding: 14px 18px;
+      margin-bottom: 18px;
+      color: #99f6e4;
+      font-size: 1.12rem;
+      font-weight: 700;
+      display: none;
+    }
+    .modal-answer.visible { display: block; animation: fadeIn 0.25s ease; }
+
+    .award-row {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+      justify-content: center;
+      margin-top: 12px;
+    }
+
+    #confetti-canvas {
+      position: fixed;
+      inset: 0;
+      pointer-events: none;
+      z-index: 200;
+    }
+
+    @media (max-width: 860px) {
+      .categories-grid { grid-template-columns: repeat(2, 1fr); }
+      .boxes-grid { grid-template-columns: repeat(3, 1fr); }
+      .mode-tabs { grid-template-columns: repeat(2, 1fr); }
+    }
+    @media (max-width: 560px) {
+      .categories-grid { grid-template-columns: 1fr; }
+      .boxes-grid { grid-template-columns: repeat(2, 1fr); }
+      .mode-tabs { grid-template-columns: 1fr; }
+    }
+  </style>
+</head>
+<body>
+  <canvas id="confetti-canvas"></canvas>
+
+  <div class="container">
+    <!-- Top Header -->
+    <header class="top-bar">
+      <div class="top-bar-main">
+        <div class="brand">
+          <div class="icon-3d-badge">🌸</div>
+          <div class="brand-text">
+            <h1>منصة التحدي والمرح 3D</h1>
+            <p>أنشطة تفاعلية للدعم النفسي الاجتماعي والتمكين</p>
+          </div>
+        </div>
+
+        <div class="controls-group">
+          <button class="btn-3d btn-glass" id="soundToggle" onclick="toggleSound()">🔊 الصوت: يعمل</button>
+          <button class="btn-3d btn-purple" onclick="toggleSoundboard()">⚡ مؤثرات حماسية</button>
+          <button class="btn-3d btn-gold" onclick="showPodium()">🏆 التتويج</button>
+          <button class="btn-3d btn-glass" onclick="resetGame()">🔄 إعادة ضبط</button>
+        </div>
+      </div>
+
+      <div class="soundboard-strip" id="soundboardStrip">
+        <span style="color:#fbbf24; font-weight:700; font-size:0.88rem;">🎵 مؤثرات الميسّرة المباشرة:</span>
+        <button class="btn-3d btn-pink" onclick="playSfx('cheer'); launchConfetti();">👏 تصفيق حار</button>
+        <button class="btn-3d btn-purple" onclick="playSfx('drumroll')">🥁 طبول التشويق</button>
+        <button class="btn-3d btn-gold" onclick="playSfx('fanfare'); launchConfetti();">🎺 بوق الفوز</button>
+        <button class="btn-3d btn-teal" onclick="playSfx('chime')">✨ جرس السكينة</button>
+      </div>
+    </header>
+
+    <!-- Scoreboard -->
+    <div class="scoreboard-header">
+      <span style="color:var(--text-muted); font-family:'Cairo'; font-weight:700;">لوحة نقاط الفرق المتنافسة</span>
+      <div style="display:flex; gap:8px;">
+        <button class="btn-3d btn-glass" style="padding:6px 12px; font-size:0.8rem;" onclick="addTeam()">+ إضافة فريق</button>
+        <button class="btn-3d btn-glass" style="padding:6px 12px; font-size:0.8rem;" onclick="removeTeam()">- تقليص فريق</button>
+      </div>
+    </div>
+    <section class="scoreboard" id="scoreboardContainer"></section>
+
+    <!-- Mode Navigation Tabs -->
+    <nav class="mode-tabs">
+      <button class="tab-btn active" onclick="switchTab('trivia', this)"><span>🧠</span> شبكة التحدي</button>
+      <button class="tab-btn" onclick="switchTab('boxes', this)"><span>🎁</span> صناديق المفاجآت</button>
+      <button class="tab-btn" onclick="switchTab('wheel', this)"><span>🎡</span> عجلة المشاعر</button>
+      <button class="tab-btn" onclick="switchTab('meter', this)"><span>👏</span> مقياس الحماس</button>
+      <button class="tab-btn" onclick="switchTab('oasis', this)"><span>🧘‍♀️</span> واحة الهدوء</button>
+    </nav>
+
+    <!-- Section 1: Trivia Grid -->
+    <section id="sec-trivia" class="game-section active">
+      <div class="section-header">
+        <div>
+          <h3>🧠 شبكة التحدي المعرفي والدعم النفسي</h3>
+          <p style="font-size:0.85rem; color:var(--text-muted);">اختاري فئة وقيمة النقاط أو اسحبي سؤالاً عشوائياً</p>
+        </div>
+        <button class="btn-3d btn-gold" onclick="pickRandomQuestion()">🎲 سؤال عشوائي مثير</button>
+      </div>
+      <div class="categories-grid" id="triviaGrid"></div>
+    </section>
+
+    <!-- Section 2: Mystery Boxes -->
+    <section id="sec-boxes" class="game-section">
+      <div class="section-header">
+        <div>
+          <h3>🎁 صناديق المفاجآت والتمكين النفسي 3D</h3>
+          <p style="font-size:0.85rem; color:var(--text-muted);">تحديات بانتومايم المشاعر، رسائل امتنان، مواقف داعمة، ومفاجآت نقاط!</p>
+        </div>
+        <div style="display:flex; gap:8px;">
+          <button class="btn-3d btn-gold" onclick="spinRandomBox()">🎲 سحب عشوائي مثير</button>
+          <button class="btn-3d btn-glass" onclick="resetBoxesOnly()">🔄 إعادة فتح الصناديق</button>
+        </div>
+      </div>
+      <div class="boxes-grid" id="boxesGrid"></div>
+    </section>
+
+    <!-- Section 3: Wheel of Emotions -->
+    <section id="sec-wheel" class="game-section">
+      <div class="wheel-card">
+        <h2>🎡 عجلة المشاعر والتنفيس الإبداعي</h2>
+        <p style="color:var(--text-muted); margin-top:4px;">أديري العجلة لاختيار فقرة تعبير وجداني، كسر جليد، أو مشاركة داعمة!</p>
+        <div class="wheel-wrapper">
+          <div class="wheel-pointer">🔻</div>
+          <canvas id="wheelCanvas" width="320" height="320"></canvas>
+        </div>
+        <button class="btn-3d btn-gold" style="font-size:1.1rem; padding:14px 28px;" onclick="spinWheel()">🎡 أديري عجلة المشاعر الآن!</button>
+      </div>
+    </section>
+
+    <!-- Section 4: Applause & Energy Meter -->
+    <section id="sec-meter" class="game-section">
+      <div class="meter-card">
+        <h2>👏 مقياس الحماس والتصفيق الجماعي</h2>
+        <p style="color:var(--text-muted); margin-top:4px;">اختاري الفريق ثم صفّقوا عبر الميكروفون أو اضغطوا سريعاً لرفع المؤشر إلى 100%!</p>
+        <div class="meter-team-select" id="meterTeamPills"></div>
+        <div class="gauge-wrapper">
+          <div class="gauge-fill" id="gaugeFill">6%</div>
+        </div>
+        <div class="meter-stats">
+          <span>المستوى الحالي: <strong id="currEnergyVal">6%</strong></span>
+          <span>أعلى قمة حماس: <strong id="peakEnergyVal">0%</strong></span>
+        </div>
+        <div style="display:flex; flex-direction:column; gap:12px; max-width:520px; margin:0 auto;">
+          <button class="btn-3d btn-pink" style="padding:18px; font-size:1.15rem;" onclick="boostEnergyTap()">🔥 اضغطي وهتفي بسرعة لشحن الطاقة! 👏</button>
+          <div style="display:flex; flex-wrap:wrap; gap:10px; justify-content:center;">
+            <button class="btn-3d btn-purple" id="micBtn" onclick="toggleMicMeter()">🎙️ تشغيل حساس الميكروفون</button>
+            <button class="btn-3d btn-gold" onclick="awardEnergyPoints()">🏆 منح نقاط الحماس للفريق</button>
+            <button class="btn-3d btn-glass" onclick="resetMeter()">🔄 تصفير المقياس</button>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Section 5: Calm Oasis -->
+    <section id="sec-oasis" class="game-section">
+      <div class="oasis-card">
+        <h2>🧘‍♀️ واحة الهدوء والتنفس الجماعي (4-4-6)</h2>
+        <p style="color:var(--text-muted); margin-top:4px;">فقرة ختامية لتهدئة الجهاز العصبي واستعادة التوازن النفسي بعد الحماس</p>
+        <div class="breathing-orb" id="breathingOrb">
+          <div style="font-family:'Cairo'; font-weight:900; font-size:1.2rem;" id="breathPhaseTitle">🌸 تنفس جماعي</div>
+          <div style="font-family:'Cairo'; font-weight:900; font-size:2rem; color:#fbbf24;" id="breathTimerVal"></div>
+        </div>
+        <p id="breathInstruction" style="color:#2dd4bf; margin-bottom:14px; font-weight:700;">اضغطي على زر البدء لتوجيه القاعة في دورة تنفس عميق ومريح</p>
+        <button class="btn-3d btn-teal" id="breathBtn" onclick="toggleBreathing()">🌬️ بدء تمرين التنفس الجماعي</button>
+
+        <div class="affirmation-box">
+          <div style="color:#f472b6; font-family:'Cairo'; font-weight:800; margin-bottom:6px;">💌 بطاقات التوكيدات الإيجابية والتمكين</div>
+          <div id="affirmationEmoji" style="font-size:2.4rem; margin:6px 0;">🌸</div>
+          <h3 id="affirmationTitle" style="color:#fbbf24; margin-bottom:8px;">قيمة الذات والأمان</h3>
+          <p id="affirmationText" style="font-size:1.2rem; font-weight:800; line-height:1.6; margin-bottom:10px;">«أنا أستحق الاحترام والتقدير والسلام الداخلي، ومشاعري مهمة ومسموعة»</p>
+          <p id="affirmationAction" style="color:#99f6e4; font-size:0.9rem; margin-bottom:14px;">💡 نشاط المجموعة: رددوا التوكيد معاً بصوت هادئ وواثق.</p>
+          <div style="display:flex; gap:10px; justify-content:center; flex-wrap:wrap;">
+            <button class="btn-3d btn-glass" onclick="prevAffirmation()">➡️ السابق</button>
+            <button class="btn-3d btn-gold" onclick="rewardAffirmation()">🌟 مكافأة التوكيد لكل الفرق (+50)</button>
+            <button class="btn-3d btn-purple" onclick="nextAffirmation()">التالي ⬅️</button>
+          </div>
+        </div>
+      </div>
+    </section>
+  </div>
+
+  <!-- Active Challenge Modal -->
+  <div class="modal-backdrop" id="challengeModal">
+    <div class="modal-box">
+      <div class="modal-badge" id="modalBadge">فئة السؤال</div>
+      <div class="timer-ring" id="modalTimer">30</div>
+      <div style="margin-bottom:12px;">
+        <button class="btn-3d btn-glass" id="doublePtsBtn" style="padding:6px 14px; font-size:0.82rem;" onclick="toggleDoublePoints()">⚡ مضاعفة النقاط الحماسية (x2)</button>
+      </div>
+      <div class="modal-question" id="modalQuestion">نص السؤال</div>
+      <div class="facilitator-tip" id="modalTip">💡 إضاءة للميسّرة</div>
+      <div class="modal-answer" id="modalAnswer">الإجابة النموذجية</div>
+      <button class="btn-3d btn-teal" id="revealBtn" onclick="revealAnswer()">✨ إظهار الإجابة والتوجيه النفسي</button>
+      <div class="award-row" id="modalAwardButtons"></div>
+      <div style="margin-top:12px; display:flex; gap:8px; justify-content:center; flex-wrap:wrap;">
+        <button class="btn-3d btn-gold" onclick="awardAllTeams()">🤝 منح النقاط لكل الفرق</button>
+        <button class="btn-3d btn-glass" onclick="closeChallengeModal()">✖ إغلاق</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Podium Modal -->
+  <div class="modal-backdrop" id="podiumModal">
+    <div class="modal-box">
+      <div style="font-size:3.5rem;">🏆</div>
+      <h2 style="color:#fbbf24; margin-bottom:8px;">منصة التتويج والاحتفال!</h2>
+      <p style="color:var(--text-muted); margin-bottom:16px;">كل فريق اليوم فائز بروح التعاون والمساندة النفسية والطاقة الجميلة!</p>
+      <div id="podiumList" style="display:flex; flex-direction:column; gap:10px; margin-bottom:18px;"></div>
+      <div style="display:flex; gap:10px; justify-content:center;">
+        <button class="btn-3d btn-pink" onclick="launchConfetti(); playSfx('fanfare');">🎊 إطلاق قصاصات الفرح</button>
+        <button class="btn-3d btn-gold" onclick="document.getElementById('podiumModal').classList.remove('open')">تم وإغلاق</button>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    let soundEnabled = true;
+    let audioCtx = null;
+    let doublePoints = false;
+    let activeChallenge = null;
+    let timerInterval = null;
+    let timerSeconds = 30;
+
+    let teams = [
+      { id: 1, name: "فريق الياسمين", emoji: "🌷", score: 0, theme: 0 },
+      { id: 2, name: "فريق الأمل", emoji: "🌟", score: 0, theme: 1 }
+    ];
+
+    const categories = [
+      {
+        id: 0, title: "الوعي بالمشاعر", emoji: "💗",
+        questions: [
+          { id: "0_0", pts: 100, q: "ما هو الفرق بين كبت المشاعر وبين تنظيم المشاعر والتعبير عنها بطريقة صحية؟", a: "كبت المشاعر يعني تجاهلها وحبسها بالداخل مما يزيد التوتر، أما تنظيمها فيعني الاعتراف بها وفهم سببها والتعبير عنها بأمان.", tip: "اطلبي من الفريق ذكر مثال سريع لطريقة صحية للتعبير عن الغضب أو الحزن.", used: false },
+          { id: "0_1", pts: 200, q: "اذكري 3 علامات جسدية ينبهنا بها الجسم عندما نشعر بالقلق أو الضغط النفسي؟", a: "تسارع نبضات القلب، شد العضلات، تغير التنفس، أو الشعور بالتعب.", tip: "الانتباه لإشارات الجسد هو أول خطوة للعناية بالذات.", used: false },
+          { id: "0_2", pts: 300, q: "ماذا نسمي القدرة على التحدث مع أنفسنا بلطف وتفهّم عند الوقوع في خطأ بدلاً من جلد الذات؟", a: "التعاطف مع الذات (Self-Compassion) أو الرفق بالنفس.", tip: "شجعي الفريق على صياغة جملة لطيفة نقولها لأنفسنا في يوم صعب.", used: false },
+          { id: "0_3", pts: 400, q: "تحدي الفريق: حوّلوا فكرة «أنا دائماً أفشل في المهام الجديدة» إلى فكرة واقعية وداعمة نفسياً!", a: "«التجارب الجديدة تحتاج وقتاً للتعلم، وكل محاولة تكسبني خبرة وتقربني من النجاح».", tip: "تُسمى هذه المهارة بإعادة البناء المعرفي الإيجابي.", used: false }
+        ]
+      },
+      {
+        id: 1, title: "مهارات التواصل", emoji: "🤝",
+        questions: [
+          { id: "1_0", pts: 100, q: "ما هي أهم مهارة في «الاستماع الفعّال» التي تجعل المتحدث يشعر بالأمان والاهتمام؟", a: "الإنصات دون مقاطعة أو إصدار أحكام مع التواصل البصري المريح وإظهار التفهم.", tip: "اسألي المشاركات: كيف تشعرين عندما يستمع إليكِ شخص بكل جوارحه؟", used: false },
+          { id: "1_1", pts: 200, q: "عند التعبير عن الانزعاج، لماذا يُفضّل استخدام «رسائل الأنا» (أنا شعرت...) بدلاً من «أنتِ السبب»؟", a: "لأن رسائل الأنا تعبر عن المشاعر بوضوح دون مهاجمة الطرف الآخر مما يفتح باب التفاهم.", tip: "اطلبي من الفريق مثالاً عملياً على رسالة أنا.", used: false },
+          { id: "1_2", pts: 300, q: "ما الفرق بين «التعاطف» وبين «الشفقة» عند مساندة صديقة تمر بأزمة؟", a: "التعاطف هو الشعور معها وتقدير قوتها ومساندتها باحترام، بينما الشفقة قد تشعرها بالضعف.", tip: "أفضل جملة تعاطف: أنا معكِ وأقدّر صعوبة ما تمرين به.", used: false },
+          { id: "1_3", pts: 400, q: "تحدي الحدود الصحية: كيف يمكن قول «لا» لطلب يفوق طاقتكِ بأسلوب لطيف وحازم في نفس الوقت؟", a: "«أقدّر ثقتكِ بي جداً، لكن طاقتي أو التزاماتي حالياً لا تسمح لي بتقديم المساعدة بالشكل المطلوب».", tip: "الحدود الصحية تحمي العلاقات من الاحتراق النفسي.", used: false }
+        ]
+      },
+      {
+        id: 2, title: "المرونة النفسية", emoji: "🌱",
+        questions: [
+          { id: "2_0", pts: 100, q: "تشبّه المرونة النفسية بنبات الخيزران أو النخلة في مواجهة الرياح؛ ماذا يعني ذلك؟", a: "الانحناء اللطيف للتكيف مع الصعوبات دون الانكسار ثم استعادة التوازن والوقوف من جديد.", tip: "المرونة هي القدرة على التعافي والنمو بعد الضغوط.", used: false },
+          { id: "2_1", pts: 200, q: "ما هي «دائرة التحكم» وكيف يساعدنا التركيز عليها في تخفيف التوتر اليومي؟", a: "التركيز على ما نملك تغييره (كلماتنا، خطواتنا) والتخفف من القلق بشأن ما لا نملك السيطرة عليه.", tip: "سمّوا شيئاً واحداً داخل دائرة تحكمكم اليوم.", used: false },
+          { id: "2_2", pts: 300, q: "اذكري 3 عادات يومية بسيطة (شواحن طاقة نفسية) تساعد على تجديد النشاط وتخفيف الضغوط؟", a: "التنفس العميق، المشي، التحدث مع شخص داعم، كتابة الامتنان، أو استراحة قصيرة.", tip: "امنحي تفاعلاً خاصاً للعادات التي يطبقونها فعلياً.", used: false },
+          { id: "2_3", pts: 400, q: "لماذا يعتبر «طلب المساعدة والدعم» عند الحاجة علامة قوة وشجاعة وليس علامة ضعف؟", a: "لأنه يعكس وعياً بالذات وثقة بالروابط الإنسانية، فالإنسان يزدهر بالتساند.", tip: "ذكّري المجموعة بمصادر الدعم الآمنة.", used: false }
+        ]
+      },
+      {
+        id: 3, title: "ألغاز ومرح جماعي", emoji: "🎉",
+        questions: [
+          { id: "3_0", pts: 100, q: "لغز ترفيهي: شيء كلما أخذتِ منه كَبُر، وكلما أضفتِ إليه صَغُر.. فما هو؟", a: "الحفرة! 🌟 (مع ابتسامة جماعية من كل الفريق!)", tip: "الضحك الجماعي يفرز الإندورفين ويكسر الحواجز فوراً.", used: false },
+          { id: "3_1", pts: 200, q: "تحدي السرعة: في 20 ثانية فقط، اذكروا 6 أشياء تبعث على الفرح وتبدأ بحرف (الميم)!", a: "محبة، مطر، موسيقى، مرح، مشاركة، مفاجأة، مودة، مساعدة!", tip: "شجعي القاعة على العد الحماسي معهم!", used: false },
+          { id: "3_2", pts: 300, q: "لغز ذكاء: يمشي بلا رجلين، ويدخل الأذنين، ويحمل أجمل الكلمات والدعم.. فما هو؟", a: "الصوت / الكلمة الطيبة! 💬✨", tip: "الكلمة الطيبة جسر مباشر للطمأنينة النفسية.", used: false },
+          { id: "3_3", pts: 400, q: "تحدي الإيقاع الجماعي: تأليف شعار حماسي من سطرين عن الأمل والتعاون وترديده بصوت واحد!", a: "أي شعار إبداعي يؤديه الفريق بروح واحدة يستحق النقاط الكاملة!", tip: "التناغم الصوتي يعزز الشعور بالانتماء للمجموعة.", used: false }
+        ]
+      }
+    ];
+
+    const mysteryBoxes = [
+      { num: 1, emoji: "🎭", title: "تحدي تمثيل المشاعر", pts: 200, q: "تحدي التمثيل الصامت: مثّلي بدون كلام شعور «شخص تلقّى خبراً مفرحاً بعد انتظار طويل» وعلى فريقك تخمينه!", a: "لغة الجسد وتعابير الوجه تعكس أكثر من 70% من مشاعرنا.", opened: false },
+      { num: 2, emoji: "💌", title: "رسالة امتنان وتقدير", pts: 200, q: "اختاري مشاركة من الفريق المنافس ووجهي لها كلمة تقدير صادقة على صفة جميلة لاحظتِها فيها اليوم!", a: "الامتنان المتبادل يحول المنافسة إلى مساحة دافئة من المودة.", opened: false },
+      { num: 3, emoji: "🌟", title: "صندوق النور الذهبي", pts: 150, q: "مكافأة فورية 150 نقطة بشرط أن يشارك كل عضو بكلمة واحدة تصف شعوره الإيجابي الآن!", a: "تسمية المشاعر الإيجابية يرسخها في الذاكرة الوجدانية.", opened: false },
+      { num: 4, emoji: "🗣️", title: "موقف وقرار داعم", pts: 250, q: "انضمت فتاة جديدة للمجموعة وتبدو خجولة. اقترحوا 3 خطوات عملية ولطيفة لدمجها دون إحراجها!", a: "المبادرة بالترحيب اللطيف والسؤال المفتوح يزيل رهبة البدايات.", opened: false },
+      { num: 5, emoji: "🔥", title: "موجة الطاقة الجماعية", pts: 200, q: "على الفريقين عمل «موجة تشجيعية» بالأيدي من اليمين إلى اليسار مع صيحة تفاؤل عالية!", a: "الحركة المشتركة تنشط الطاقة وتجدد التركيز.", opened: false },
+      { num: 6, emoji: "🎭", title: "بانتومايم المساندة", pts: 200, q: "مثّلي دور «صديقة تهدّئ زميلتها المتوترة قبل مقابلة مهمة» بدون نطق أي كلمة!", a: "الحضور الهادئ والابتسامة المطمئنة ينقلان الأمان.", opened: false },
+      { num: 7, emoji: "💎", title: "كنز القوة الداخلية", pts: 250, q: "كل عضوة في الفريق تذكر مهارة أو صفة جميلة تفتخر بوجودها في شخصيتها!", a: "الاعتراف بنقاط القوة ركيزة أساسية لتقدير الذات.", opened: false },
+      { num: 8, emoji: "🤝", title: "حكمة التواصل", pts: 250, q: "حدث سوء فهم بين صديقتين بسبب رسالة نصية. ما أفضل خطوة لإصلاح الموقف بحكمة؟", a: "الحوار المباشر وحسن الظن وتوضيح المقصد يذيب الخلافات.", opened: false },
+      { num: 9, emoji: "🌈", title: "عدسة الإيجابيات", pts: 200, q: "اذكروا 4 دروس أو فوائد جميلة يمكن أن يكتسبها الإنسان بعد تجاوز موقف صعب!", a: "النمو بعد التحديات يكشف لنا قدرات كامنة فينا.", opened: false },
+      { num: 10, emoji: "🎁", title: "هدية الروح الرياضية", pts: 200, q: "يحصل فريقكم على 200 نقطة مع إهداء تحية تشجيعية حارة للفريق المنافس!", a: "مشاركة النجاح تضاعف السعادة لدى الجميع.", opened: false },
+      { num: 11, emoji: "🎯", title: "تحدي التوازن", pts: 200, q: "عندما تتراكم المهام وتشعرين بالإرهاق، ما هي أول خطوة عملية لاستعادة ترتيب أولوياتك؟", a: "تجزئة المهام الكبيرة إلى خطوات صغيرة مع أخذ نفس عميق.", opened: false },
+      { num: 12, emoji: "👑", title: "تاج التمكين", pts: 300, q: "اختاروا عضوة من فريقكم ووجهوا لها 5 جمل تشجيعية حماسية في 20 ثانية!", a: "الدعم الجماعي المباشر يرفع الثقة بالنفس ويخلق ذكرى لا تُنسى.", opened: false }
+    ];
+
+    const wheelSlices = [
+      { label: "لحظة فخر 🌟", color: "#ec4899", pts: 150, q: "شاركي موقفاً أو تحدياً صغيراً نجحتِ في تجاوزه مؤخراً وشعرتِ بعده بالفخر بنفسك!", a: "الاحتفاء بالإنجازات اليومية يعزز الثقة بالذات." },
+      { label: "ضحكة من القلب 😂", color: "#8b5cf6", pts: 150, q: "احكي موقفاً طريفاً أو قودي الفريق في تحدي «الضحكة المعدية» لمدة 15 ثانية!", a: "المرح يعيد شحن طاقة القاعة بالكامل." },
+      { label: "نقطة قوتي 💪", color: "#14b8a6", pts: 150, q: "لو كانت لديكِ «قوة خارقة نفسية» لمساندة من حولك، فماذا ستكون؟", a: "ربط الصفات الشخصية بالقوة يعزز الهوية الإيجابية." },
+      { label: "رسالة شكر 💐", color: "#f59e0b", pts: 150, q: "وجهي رسالة شكر لشخص كان له أثر طيب وداعم في أيامك!", a: "تذكر الداعمين يعزز الشعور بالأمان الاجتماعي." },
+      { label: "تغيير الزاوية 🌈", color: "#3b82f6", pts: 200, q: "أكملي الجملة: «عندما يغلق باب، فإنني أتعلم كيف...» بكلمات تبعث على الأمل!", a: "التفكير المرن يفتح مسارات جديدة للحلول." },
+      { label: "تحدي 30 ثانية ⚡", color: "#db2777", pts: 200, q: "في 30 ثانية: عدّدوا كفريق 7 أشياء بسيطة في يومكم تجلب لكم السكينة!", a: "الالتفات للتفاصيل الجميلة يغذي الشعور بالرضا." },
+      { label: "تقمص الدور 🎭", color: "#0d9488", pts: 200, q: "صديقتكِ تقول: «أشعر أنني وحيدة».. ماذا ستقولين لها في جملتين من القلب؟", a: "تدريب عملي على الاحتواء العاطفي والتواجد الداعم." },
+      { label: "هدف مشرق 🎯", color: "#7c3aed", pts: 150, q: "شاركي عادة إيجابية صغيرة تودين البدء بها هذا الأسبوع للعناية بصحتكِ النفسية!", a: "إعلان النية الإيجابية أمام المجموعة يزيد التحفيز." }
+    ];
+
+    const affirmations = [
+      { emoji: "🌸", title: "قيمة الذات والأمان", text: "«أنا أستحق الاحترام والتقدير والسلام الداخلي، ومشاعري مهمة ومسموعة»", action: "رددوا التوكيد معاً بصوت هادئ وواثق مع وضع اليد اليمنى على القلب." },
+      { emoji: "🌱", title: "القدرة على التجاوز", text: "«لقد تجاوزت أياماً صعبة من قبل، ولديّ من القوة والمرونة ما يعينني على النمو دائماً»", action: "خذوا نفساً عميقاً وابتسموا لبعضكم البعض بتقدير." },
+      { emoji: "🤝", title: "قوة التساند الجماعي", text: "«نحن معاً أقوى؛ كلماتنا اللطيفة ومساندتنا لبعضنا تصنع مساحة آمنة ومزهرة»", action: "تحية عالية أو تصفيقة دافئة لكل الحاضرات في القاعة!" },
+      { emoji: "☀️", title: "الأمل والإشراق", text: "«كل يوم جديد يحمل فرصة جديدة لبداية أجمل، وأنا أختار الأمل والخطوات الإيجابية»", action: "شاركوا كلمة واحدة تلخص أجمل شعور خرجتم به من جلسة اليوم." }
+    ];
+    let currentAffirmation = 0;
+
+    function playSfx(type) {
+      if (!soundEnabled) return;
+      try {
+        if (!audioCtx) audioCtx = new (window.AudioContext || window.webkitAudioContext)();
+        const now = audioCtx.currentTime;
+        const notes = type === 'fanfare' ? [523, 659, 784, 1046]
+                    : type === 'cheer' ? [440, 554, 659, 880]
+                    : type === 'drumroll' ? [200, 240, 280, 340, 784]
+                    : type === 'chime' ? [432, 528]
+                    : [600];
+        notes.forEach((freq, idx) => {
+          const osc = audioCtx.createOscillator();
+          const gain = audioCtx.createGain();
+          osc.type = 'triangle';
+          osc.frequency.setValueAtTime(freq, now + idx * 0.08);
+          gain.gain.setValueAtTime(0.18, now + idx * 0.08);
+          gain.gain.exponentialRampToValueAtTime(0.001, now + idx * 0.08 + 0.18);
+          osc.connect(gain);
+          gain.connect(audioCtx.destination);
+          osc.start(now + idx * 0.08);
+          osc.stop(now + idx * 0.08 + 0.19);
+        });
+      } catch (e) {}
+    }
+
+    function toggleSound() {
+      soundEnabled = !soundEnabled;
+      document.getElementById('soundToggle').textContent = soundEnabled ? '🔊 الصوت: يعمل' : '🔇 الصوت: صامت';
+      if (soundEnabled) playSfx('click');
+    }
+
+    function toggleSoundboard() {
+      document.getElementById('soundboardStrip').classList.toggle('open');
+      playSfx('click');
+    }
+
+    function renderScoreboard() {
+      const container = document.getElementById('scoreboardContainer');
+      container.innerHTML = teams.map((t, idx) => `
+        <div class="team-card team-theme-${idx % 4}">
+          <div class="team-info">
+            <div class="team-avatar-3d">${t.emoji}</div>
+            <div>
+              <input class="team-name-input" value="${t.name}" onchange="updateTeamName(${t.id}, this.value)" />
+              <div style="font-size:0.75rem; color:#f9a8d4;">اضغطي لتعديل الاسم</div>
+            </div>
+          </div>
+          <div class="score-controls">
+            <button class="mini-btn" onclick="changeScore(${t.id}, -50)">-</button>
+            <div class="score-val">${t.score}</div>
+            <button class="mini-btn" onclick="changeScore(${t.id}, 50)">+</button>
+          </div>
+        </div>
+      `).join('');
+      renderMeterPills();
+    }
+
+    function updateTeamName(id, val) {
+      const team = teams.find(t => t.id === id);
+      if (team && val.trim()) team.name = val.trim();
+      renderScoreboard();
+    }
+
+    function changeScore(id, delta) {
+      const team = teams.find(t => t.id === id);
+      if (team) {
+        team.score = Math.max(0, team.score + delta);
+        playSfx(delta > 0 ? 'cheer' : 'click');
+        renderScoreboard();
+      }
+    }
+
+    function addTeam() {
+      if (teams.length >= 4) return;
+      const presets = [
+        { name: "فريق القوة", emoji: "💜" },
+        { name: "فريق الإشراق", emoji: "☀️" }
+      ];
+      const p = presets[teams.length - 2] || { name: "فريق جديد", emoji: "🌸" };
+      teams.push({ id: Date.now(), name: p.name, emoji: p.emoji, score: 0, theme: teams.length });
+      playSfx('click');
+      renderScoreboard();
+    }
+
+    function removeTeam() {
+      if (teams.length <= 2) return;
+      teams.pop();
+      playSfx('click');
+      renderScoreboard();
+    }
+
+    function switchTab(tabId, btn) {
+      document.querySelectorAll('.game-section').forEach(s => s.classList.remove('active'));
+      document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
+      document.getElementById('sec-' + tabId).classList.add('active');
+      btn.classList.add('active');
+      playSfx('click');
+    }
+
+    function renderTrivia() {
+      const grid = document.getElementById('triviaGrid');
+      grid.innerHTML = categories.map((cat, idx) => `
+        <div class="cat-column cat-${idx}">
+          <div class="cat-header">
+            <span style="font-size:1.5rem;">${cat.emoji}</span>
+            <span>${cat.title}</span>
+          </div>
+          ${cat.questions.map(q => `
+            <button class="q-tile ${q.used ? 'used' : ''}" onclick="openQuestion(${cat.id}, '${q.id}')">
+              ${q.used ? '✓ ' + q.pts : q.pts + ' ⭐'}
+            </button>
+          `).join('')}
+        </div>
+      `).join('');
+    }
+
+    function openQuestion(catId, qId) {
+      const cat = categories.find(c => c.id === catId);
+      const q = cat.questions.find(item => item.id === qId);
+      activeChallenge = { type: 'trivia', item: q, badge: `${cat.emoji} ${cat.title}`, pts: q.pts };
+      showChallengeModal(q.q, q.a, q.tip);
+    }
+
+    function pickRandomQuestion() {
+      const unused = [];
+      categories.forEach(c => c.questions.forEach(q => { if (!q.used) unused.push({ c, q }); }));
+      if (!unused.length) return alert('تم فتح جميع الأسئلة!');
+      const pick = unused[Math.floor(Math.random() * unused.length)];
+      openQuestion(pick.c.id, pick.q.id);
+    }
+
+    function renderBoxes() {
+      const grid = document.getElementById('boxesGrid');
+      grid.innerHTML = mysteryBoxes.map(b => `
+        <button class="mystery-box ${b.opened ? 'opened' : ''}" id="mbox-${b.num}" onclick="openBox(${b.num})">
+          <div class="box-emoji">${b.opened ? '🔓' : b.emoji}</div>
+          <div class="box-num">صندوق #${b.num}</div>
+          <div style="font-size:0.8rem; color:#fde047; font-weight:700;">${b.pts} نقطة</div>
+        </button>
+      `).join('');
+    }
+
+    function openBox(num) {
+      const b = mysteryBoxes.find(x => x.num === num);
+      activeChallenge = { type: 'box', item: b, badge: `صندوق #${b.num} • ${b.title}`, pts: b.pts };
+      showChallengeModal(b.q, b.a, "شجعي المشاركات على التفاعل العفوي والتصفيق لبعضهن بعد أداء التحدي.");
+    }
+
+    function spinRandomBox() {
+      const unopened = mysteryBoxes.filter(b => !b.opened);
+      if (!unopened.length) return alert('تم فتح جميع الصناديق!');
+      let step = 0;
+      const total = 14;
+      const interval = setInterval(() => {
+        document.querySelectorAll('.mystery-box').forEach(el => el.classList.remove('highlight'));
+        const pick = unopened[Math.floor(Math.random() * unopened.length)];
+        const el = document.getElementById('mbox-' + pick.num);
+        if (el) el.classList.add('highlight');
+        playSfx('click');
+        step++;
+        if (step >= total) {
+          clearInterval(interval);
+          setTimeout(() => openBox(pick.num), 250);
+        }
+      }, 95);
+    }
+
+    function resetBoxesOnly() {
+      mysteryBoxes.forEach(b => b.opened = false);
+      renderBoxes();
+      playSfx('click');
+    }
+
+    function showChallengeModal(qText, aText, tipText) {
+      doublePoints = false;
+      playSfx('cheer');
+      updateModalHeader();
+      document.getElementById('modalQuestion').textContent = qText;
+      document.getElementById('modalTip').textContent = '💡 إضاءة للميسّرة: ' + tipText;
+      const ansEl = document.getElementById('modalAnswer');
+      ansEl.textContent = aText;
+      ansEl.classList.remove('visible');
+      document.getElementById('revealBtn').style.display = 'inline-flex';
+      renderModalAwardButtons();
+      document.getElementById('challengeModal').classList.add('open');
+
+      clearInterval(timerInterval);
+      timerSeconds = 30;
+      document.getElementById('modalTimer').textContent = timerSeconds;
+      timerInterval = setInterval(() => {
+        if (timerSeconds > 0) {
+          timerSeconds--;
+          document.getElementById('modalTimer').textContent = timerSeconds;
+        }
+      }, 1000);
+    }
+
+    function updateModalHeader() {
+      if (!activeChallenge) return;
+      const mult = doublePoints ? 2 : 1;
+      document.getElementById('modalBadge').textContent = `${activeChallenge.badge} • ${activeChallenge.pts * mult} نقطة`;
+      document.getElementById('doublePtsBtn').textContent = doublePoints
+        ? `🔥 النقاط مضاعفة الآن (x2 = ${activeChallenge.pts * 2} نقطة)!`
+        : `⚡ مضاعفة النقاط الحماسية (x2)`;
+      renderModalAwardButtons();
+    }
+
+    function toggleDoublePoints() {
+      doublePoints = !doublePoints;
+      playSfx('fanfare');
+      updateModalHeader();
+    }
+
+    function renderModalAwardButtons() {
+      if (!activeChallenge) return;
+      const pts = activeChallenge.pts * (doublePoints ? 2 : 1);
+      const styles = ['btn-pink', 'btn-teal', 'btn-purple', 'btn-gold'];
+      document.getElementById('modalAwardButtons').innerHTML = teams.map((t, idx) => `
+        <button class="btn-3d ${styles[idx % 4]}" onclick="awardPoints(${t.id})">
+          ${t.emoji} +${pts} ${t.name}
+        </button>
+      `).join('');
+    }
+
+    function revealAnswer() {
+      document.getElementById('modalAnswer').classList.add('visible');
+      document.getElementById('revealBtn').style.display = 'none';
+      playSfx('chime');
+    }
+
+    function awardPoints(teamId) {
+      if (!activeChallenge) return;
+      const pts = activeChallenge.pts * (doublePoints ? 2 : 1);
+      if (activeChallenge.type === 'trivia') activeChallenge.item.used = true;
+      if (activeChallenge.type === 'box') activeChallenge.item.opened = true;
+      changeScore(teamId, pts);
+      launchConfetti();
+      playSfx('fanfare');
+      renderTrivia();
+      renderBoxes();
+      closeChallengeModal();
+    }
+
+    function awardAllTeams() {
+      if (!activeChallenge) return;
+      const pts = activeChallenge.pts * (doublePoints ? 2 : 1);
+      if (activeChallenge.type === 'trivia') activeChallenge.item.used = true;
+      if (activeChallenge.type === 'box') activeChallenge.item.opened = true;
+      teams.forEach(t => t.score += pts);
+      renderScoreboard();
+      renderTrivia();
+      renderBoxes();
+      launchConfetti();
+      playSfx('fanfare');
+      closeChallengeModal();
+    }
+
+    function closeChallengeModal() {
+      clearInterval(timerInterval);
+      document.getElementById('challengeModal').classList.remove('open');
+    }
+
+    /* Wheel Canvas */
+    let currentWheelRotation = 0;
+    function drawWheel() {
+      const canvas = document.getElementById('wheelCanvas');
+      if (!canvas) return;
+      const ctx = canvas.getContext('2d');
+      const cx = canvas.width / 2;
+      const cy = canvas.height / 2;
+      const r = cx - 8;
+      const arc = (2 * Math.PI) / wheelSlices.length;
+
+      ctx.clearRect(0, 0, canvas.width, canvas.height);
+      wheelSlices.forEach((s, i) => {
+        ctx.beginPath();
+        ctx.moveTo(cx, cy);
+        ctx.arc(cx, cy, r, i * arc, (i + 1) * arc);
+        ctx.fillStyle = s.color;
+        ctx.fill();
+        ctx.strokeStyle = 'rgba(255,255,255,0.35)';
+        ctx.lineWidth = 2;
+        ctx.stroke();
+
+        ctx.save();
+        ctx.translate(cx, cy);
+        ctx.rotate(i * arc + arc / 2);
+        ctx.textAlign = 'right';
+        ctx.fillStyle = '#fff';
+        ctx.font = 'bold 14px Cairo';
+        ctx.fillText(s.label, r - 16, 5);
+        ctx.restore();
+      });
+    }
+
+    function spinWheel() {
+      const extra = (4 + Math.floor(Math.random() * 3)) * 360 + Math.floor(Math.random() * 360);
+      currentWheelRotation += extra;
+      const canvas = document.getElementById('wheelCanvas');
+      canvas.style.transform = `rotate(${currentWheelRotation}deg)`;
+      playSfx('drumroll');
+      setTimeout(() => {
+        const pick = wheelSlices[Math.floor(Math.random() * wheelSlices.length)];
+        activeChallenge = { type: 'wheel', item: pick, badge: `🎡 عجلة المشاعر • ${pick.label}`, pts: pick.pts };
+        showChallengeModal(pick.q, pick.a, "احتفي بمشاركة الفريق وامنحيهم مساحة آمنة للتعبير.");
+      }, 3250);
+    }
+
+    /* Applause & Energy Meter */
+    let selectedMeterTeam = 1;
+    let currentEnergy = 6;
+    let peakEnergy = 0;
+    let micStream = null;
+    let micInterval = null;
+
+    function renderMeterPills() {
+      const el = document.getElementById('meterTeamPills');
+      if (!el) return;
+      el.innerHTML = teams.map(t => `
+        <button class="select-pill ${t.id === selectedMeterTeam ? 'selected' : ''}" onclick="selectedMeterTeam=${t.id}; renderMeterPills();">
+          ${t.emoji} ${t.name}
+        </button>
+      `).join('');
+    }
+
+    function updateEnergyUI() {
+      const fill = document.getElementById('gaugeFill');
+      fill.style.width = Math.max(6, Math.round(currentEnergy)) + '%';
+      fill.textContent = Math.round(currentEnergy) + '%';
+      document.getElementById('currEnergyVal').textContent = Math.round(currentEnergy) + '%';
+      document.getElementById('peakEnergyVal').textContent = Math.round(peakEnergy) + '%';
+    }
+
+    function boostEnergyTap() {
+      currentEnergy = Math.min(100, currentEnergy + 12);
+      peakEnergy = Math.max(peakEnergy, currentEnergy);
+      playSfx('click');
+      updateEnergyUI();
+    }
+
+    setInterval(() => {
+      if (currentEnergy > 6) {
+        currentEnergy = Math.max(6, currentEnergy - 2);
+        updateEnergyUI();
+      }
+    }, 110);
+
+    async function toggleMicMeter() {
+      const btn = document.getElementById('micBtn');
+      if (micStream) {
+        micStream.getTracks().forEach(t => t.stop());
+        micStream = null;
+        clearInterval(micInterval);
+        btn.textContent = '🎙️ تشغيل حساس الميكروفون';
+        return;
+      }
+      try {
+        micStream = await navigator.mediaDevices.getUserMedia({ audio: true });
+        const ctx = new (window.AudioContext || window.webkitAudioContext)();
+        const src = ctx.createMediaStreamSource(micStream);
+        const analyser = ctx.createAnalyser();
+        analyser.fftSize = 256;
+        src.connect(analyser);
+        const data = new Uint8Array(analyser.frequencyBinCount);
+        btn.textContent = '⏹️ إيقاف حساس الميكروفون';
+        micInterval = setInterval(() => {
+          analyser.getByteFrequencyData(data);
+          const avg = data.reduce((a, b) => a + b, 0) / data.length;
+          const level = Math.min(100, (avg / 95) * 100);
+          if (level > currentEnergy) {
+            currentEnergy = level;
+            peakEnergy = Math.max(peakEnergy, currentEnergy);
+            updateEnergyUI();
+          }
+        }, 70);
+      } catch (e) {
+        alert('يمكنكم استخدام زر الضغط السريع لرفع مقياس الحماس مباشرة!');
+      }
+    }
+
+    function awardEnergyPoints() {
+      const bonus = peakEnergy >= 90 ? 250 : peakEnergy >= 70 ? 200 : peakEnergy >= 45 ? 150 : 100;
+      changeScore(selectedMeterTeam, bonus);
+      launchConfetti();
+      playSfx('fanfare');
+      resetMeter();
+    }
+
+    function resetMeter() {
+      currentEnergy = 6;
+      peakEnergy = 0;
+      updateEnergyUI();
+    }
+
+    /* Calm Oasis Breathing & Affirmations */
+    let breathingTimer = null;
+    function toggleBreathing() {
+      const orb = document.getElementById('breathingOrb');
+      const title = document.getElementById('breathPhaseTitle');
+      const instr = document.getElementById('breathInstruction');
+      const btn = document.getElementById('breathBtn');
+      if (breathingTimer) {
+        clearInterval(breathingTimer);
+        breathingTimer = null;
+        orb.className = 'breathing-orb';
+        title.textContent = '🌸 تنفس جماعي';
+        btn.textContent = '🌬️ بدء تمرين التنفس الجماعي';
+        return;
+      }
+      btn.textContent = '⏹️ إيقاف تمرين التنفس';
+      let step = 0;
+      const runPhase = () => {
+        playSfx('chime');
+        if (step % 3 === 0) {
+          orb.className = 'breathing-orb expand';
+          title.textContent = 'شهيق عميق 🌸 (4 ث)';
+          instr.textContent = 'تنفسي ببطء من الأنف واشعري بالهدوء يملأ صدرك...';
+        } else if (step % 3 === 1) {
+          title.textContent = 'احتفاظ بالهواء ✨ (4 ث)';
+          instr.textContent = 'احتفظي بالنفس بهدوء وركزي على اللحظة الحالية...';
+        } else {
+          orb.className = 'breathing-orb contract';
+          title.textContent = 'زفير مريح 🍃 (6 ث)';
+          instr.textContent = 'أخرجي الهواء ببطء من الفم واتركي أي توتر يرحل...';
+        }
+        step++;
+      };
+      runPhase();
+      breathingTimer = setInterval(runPhase, 4200);
+    }
+
+    function renderAffirmation() {
+      const a = affirmations[currentAffirmation];
+      document.getElementById('affirmationEmoji').textContent = a.emoji;
+      document.getElementById('affirmationTitle').textContent = a.title;
+      document.getElementById('affirmationText').textContent = a.text;
+      document.getElementById('affirmationAction').textContent = '💡 نشاط المجموعة: ' + a.action;
+    }
+
+    function nextAffirmation() {
+      currentAffirmation = (currentAffirmation + 1) % affirmations.length;
+      playSfx('click');
+      renderAffirmation();
+    }
+
+    function prevAffirmation() {
+      currentAffirmation = (currentAffirmation - 1 + affirmations.length) % affirmations.length;
+      playSfx('click');
+      renderAffirmation();
+    }
+
+    function rewardAffirmation() {
+      teams.forEach(t => t.score += 50);
+      renderScoreboard();
+      launchConfetti();
+      playSfx('fanfare');
+    }
+
+    function showPodium() {
+      const sorted = [...teams].sort((a, b) => b.score - a.score);
+      const medals = ['🥇 المركز الأول', '🥈 المركز الثاني', '🥉 المركز الثالث', '🎖️ المركز الرابع'];
+      const badges = ['👑 وسام التميز والطاقة الإيجابية', '🤝 وسام التساند والروح الجماعية', '🌸 وسام الإبداع والمرونة', '🌟 وسام البهجة والتفاعل'];
+      document.getElementById('podiumList').innerHTML = sorted.map((t, i) => `
+        <div style="display:flex; justify-content:space-between; align-items:center; background:rgba(255,255,255,0.08); padding:14px 18px; border-radius:18px; border:1.5px solid ${i===0 ? '#fbbf24' : 'rgba(255,255,255,0.15)'};">
+          <div style="text-align:right;">
+            <div style="font-family:'Cairo'; font-weight:900; font-size:1.1rem;">${t.emoji} ${medals[i]} • ${t.name}</div>
+            <div style="color:#f9a8d4; font-size:0.82rem;">${badges[i]}</div>
+          </div>
+          <div style="font-family:'Cairo'; font-weight:900; font-size:1.4rem; color:#fbbf24;">${t.score} نقطة</div>
+        </div>
+      `).join('');
+      document.getElementById('podiumModal').classList.add('open');
+      launchConfetti();
+      playSfx('fanfare');
+    }
+
+    function resetGame() {
+      teams.forEach(t => t.score = 0);
+      categories.forEach(c => c.questions.forEach(q => q.used = false));
+      mysteryBoxes.forEach(b => b.opened = false);
+      renderScoreboard();
+      renderTrivia();
+      renderBoxes();
+      resetMeter();
+      playSfx('click');
+    }
+
+    /* Confetti Canvas */
+    function launchConfetti() {
+      const canvas = document.getElementById('confetti-canvas');
+      const ctx = canvas.getContext('2d');
+      canvas.width = window.innerWidth;
+      canvas.height = window.innerHeight;
+      const colors = ['#f472b6', '#fbbf24', '#2dd4bf', '#a78bfa', '#38bdf8'];
+      const pieces = Array.from({ length: 70 }, () => ({
+        x: Math.random() * canvas.width,
+        y: -20,
+        w: 8 + Math.random() * 8,
+        h: 6 + Math.random() * 6,
+        vy: 3 + Math.random() * 5,
+        vx: (Math.random() - 0.5) * 4,
+        color: colors[Math.floor(Math.random() * colors.length)]
+      }));
+      let frame = 0;
+      function step() {
+        ctx.clearRect(0, 0, canvas.width, canvas.height);
+        pieces.forEach(p => {
+          p.x += p.vx;
+          p.y += p.vy;
+          ctx.fillStyle = p.color;
+          ctx.fillRect(p.x, p.y, p.w, p.h);
+        });
+        frame++;
+        if (frame < 110) requestAnimationFrame(step);
+        else ctx.clearRect(0, 0, canvas.width, canvas.height);
+      }
+      step();
+    }
+
+    renderScoreboard();
+    renderTrivia();
+    renderBoxes();
+    drawWheel();
+    renderAffirmation();
+  </script>
+</body>
+</html>
