@@ -1,0 +1,15 @@
+<resources>
+    <string name="app_name">منصة التحدي والمرح 3D</string>
+    <string name="app_subtitle">أنشطة تفاعلية للدعم النفسي الاجتماعي والتمكين</string>
+    <string name="sound_on">🔊 الصوت: يعمل</string>
+    <string name="sound_off">🔇 الصوت: صامت</string>
+    <string name="customize_questions">⚙️ تخصيص الفقرات</string>
+    <string name="podium_title">🏆 التتويج</string>
+    <string name="reset_game">🔄 إعادة ضبط</string>
+    <string name="tap_to_edit_name">اضغطي لتعديل الاسم أو الشعار</string>
+    <string name="tab_trivia">🧠 شبكة التحدي</string>
+    <string name="tab_boxes">🎁 صناديق المفاجآت</string>
+    <string name="tab_wheel">🎡 عجلة المشاعر</string>
+    <string name="tab_meter">👏 مقياس الحماس</string>
+    <string name="tab_oasis">🧘‍♀️ واحة الهدوء</string>
+</resources>
